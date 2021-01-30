@@ -3,7 +3,11 @@ import {fruitBowl} from './fruitBowl';
 
 const svg = select('svg');
 
-const makeFruit = type => ({type});
+const makeFruit = type => ({
+    type,
+    id: Math.random()
+});
+
 let fruits = range(5)
     .map(() => makeFruit('apple'));
 

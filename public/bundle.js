@@ -2665,13 +2665,10 @@ const fruitBowl = (selection, props) => {
         .data(fruits);
     const groupEnter = groups.enter().append('g');
     groupEnter.merge(groups)
-        .attr('transform', (d, i) => `translate(${i * 160 + 135}, ${height / 2})`)
-        .transition().duration(1000)
-        .attr('opacity', 1);
+        .attr('transform', (d, i) => `translate(${i * 160 + 135}, ${height / 2})`);
 
     groups.exit()
         .transition().duration(1000)
-        .attr('opacity', 0)
         .attr('r', 0)
         .remove();
 

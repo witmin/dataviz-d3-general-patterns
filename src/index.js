@@ -22,13 +22,9 @@ const render = (selection, {fruits}) => {
         .enter().append('circle')
             .attr('cx', (d, i) => i * 120 + 60)
             .attr('cy', height / 2)
+        .merge(circles)
             .attr('r', d => sizeScale(d.type))
             .attr('fill', d => colorScale(d.type));
-
-    // Update
-    circles
-        .attr('r', d => sizeScale(d.type))
-        .attr('fill', d => colorScale(d.type));
 
     // exit & Update
     circles.exit().remove();

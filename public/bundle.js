@@ -2652,13 +2652,22 @@ const sizeScale = ordinal()
 const fruitBowl = (selection, props) => {
     const {fruits, height} = props;
 
+    selection.selectAll('rect')
+        .data([null])
+        .enter().append('rect')
+        .attr ('y', 110)
+        .attr ('width', 920)
+        .attr ('height', 300)
+        .attr ('rx', 300/2)
+        .attr('fill', '#8fe5ff');
+
     const groups = selection.selectAll('g')
         .data(fruits);
     const groupEnter = groups.enter().append('g')
         .attr('opacity', 0)
         .attr('transform', `scale(0)`);
     groupEnter.merge(groups)
-        .attr('transform', (d, i) => `translate(${i * 120 + 60}, ${height / 2})`)
+        .attr('transform', (d, i) => `translate(${i * 160 + 135}, ${height / 2})`)
         .transition().duration(1000)
         .attr('opacity', 1);
 

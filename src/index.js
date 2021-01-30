@@ -4,7 +4,7 @@ import {fruitBowl} from './fruitBowl';
 const svg = select('svg');
 
 const makeFruit = type => ({type});
-const fruits = range(5)
+let fruits = range(5)
     .map(() => makeFruit('apple'));
 
 const render = () => {
@@ -28,3 +28,9 @@ setTimeout(() => {
     fruits[2].type = 'lemon';
     render();
 }, 2000);
+
+// Eat the 2nd apple
+setTimeout(() => {
+    fruits = fruits.filter((d, i) => i !==1);
+    render();
+}, 3000);

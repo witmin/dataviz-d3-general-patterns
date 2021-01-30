@@ -1,4 +1,4 @@
-import { scaleOrdinal } from 'd3';
+import {scaleOrdinal} from 'd3';
 
 const colorScale = scaleOrdinal()
     .domain(['apple', 'lemon'])
@@ -18,10 +18,15 @@ export const fruitBowl = (selection, props) => {
         .enter().append('circle')
         .attr('cx', (d, i) => i * 120 + 60)
         .attr('cy', height / 2)
+        .attr('r', 0)
         .merge(circles)
-        .attr('r', d => sizeScale(d.type))
-        .attr('fill', d => colorScale(d.type));
+        .attr('fill', d => colorScale(d.type))
+        .transition().duration(1000)
+            .attr('r', d => sizeScale(d.type));
 
     // exit & Update
-    circles.exit().remove();
+    circles.exit()
+        .transition().duration(1000)
+            .attr('r', 0)
+        .remove();
 }

@@ -2658,18 +2658,23 @@ const fruitBowl = (selection, props) => {
         .enter().append('circle')
         .attr('cx', (d, i) => i * 120 + 60)
         .attr('cy', height / 2)
+        .attr('r', 0)
         .merge(circles)
-        .attr('r', d => sizeScale(d.type))
-        .attr('fill', d => colorScale(d.type));
+        .attr('fill', d => colorScale(d.type))
+        .transition().duration(1000)
+            .attr('r', d => sizeScale(d.type));
 
     // exit & Update
-    circles.exit().remove();
+    circles.exit()
+        .transition().duration(1000)
+            .attr('r', 0)
+        .remove();
 };
 
 const svg = select('svg');
 
 const makeFruit = type => ({type});
-const fruits = range(5)
+let fruits = range(5)
     .map(() => makeFruit('apple'));
 
 const render = () => {
@@ -2693,3 +2698,9 @@ setTimeout(() => {
     fruits[2].type = 'lemon';
     render();
 }, 2000);
+
+// Eat the 2nd apple
+setTimeout(() => {
+    fruits = fruits.filter((d, i) => i !==1);
+    render();
+}, 3000);
